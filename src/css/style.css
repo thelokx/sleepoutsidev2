@@ -99,7 +99,7 @@ p {
   color: var(--tertiary-color);
 }
 
-button {
+.addToCart-button {
   padding: 0.5em 2em;
   background-color: var(--secondary-color);
   color: white;
@@ -260,4 +260,21 @@ button {
 footer {
   font-size: var(--small-font);
   padding: 1em;
+}
+#superscript {
+  display: none;
+  position: absolute;
+  top: 10%;
+  left: 45%;
+  padding: 1px 6px;
+  font-size: 1.1rem;
+  background-color: #fda150;
+  border-radius: 25px;
+}
+.cart-footer {
+  display: none;
+}
+.total-cart {
+  text-align: right;
+  margin-right: 20%;
 }

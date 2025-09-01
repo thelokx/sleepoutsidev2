@@ -29,3 +29,21 @@ export function getParam(param){
   const product = urlParams.get(param);
   return product;
 }
+//renderizzare elenco con modello
+export function renderListWithTemplate(templateFn, parentElement, list, position = "afterbegin", clear = false){
+  if(clear == true){
+    parentElement.insertAdjacentHTML = "";
+  }
+  const htmlStrings = list.map(templateFn);
+  parentElement.insertAdjacentHTML(position, htmlStrings.join(''));
+}
+
+export function superscriptBackpack(){
+  const cartItems = getLocalStorage("so-cart")|| [];
+  const htmlElemnet = qs("#superscript")
+  console.log(superscript)
+  if(cartItems.length > 0){
+    htmlElemnet.style.display = "block";
+    htmlElemnet.innerHTML = cartItems.length
+  }
+}
