@@ -7,6 +7,7 @@ export default class ProductDetails {
     }
     async init(){
         this.product = await this.dataSource.findProductById(this.productId);
+        console.log(this.product)
         this.renderProductDetails()
         // aggiungere un pulsante aggiungi al carrello
         document.getElementById("addToCart").addEventListener("click", this.addToCart.bind(this)); 
@@ -20,7 +21,7 @@ export default class ProductDetails {
       document.querySelector("#main").innerHTML = productDetailsTemplate(this.product)
     }
 }
-
+//modello di dettagli del prodotto
 function productDetailsTemplate(product){
         return `
         <section class="product-detail">
@@ -36,6 +37,8 @@ function productDetailsTemplate(product){
 
         <p class="product-card__price">${product.ListPrice}</p>
 
+        <p class="product-card__discount">discount :$${(product.SuggestedRetailPrice-product.ListPrice).toFixed(2)}</p>
+
         <p class="product__color">${product.Colors[0].ColorName}</p>
 
         <p class="product__description">
@@ -43,7 +46,7 @@ function productDetailsTemplate(product){
         </p>
 
         <div class="product-detail__add">
-          <button id="addToCart" data-id="${product.ID}">Add to Cart</button>
+          <button class ="addToCart-button" id="addToCart" data-id="${product.Id}">Add to Cart</button>
         </div>
       </section>
         `
