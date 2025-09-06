@@ -1,4 +1,5 @@
-import { getLocalStorage, setLocalStorage } from "./utils.mjs";
+import { getLocalStorage, setLocalStorage, loadHeaderFooter } from "./utils.mjs";
+
 export default class ProductDetails {
     constructor(productId, dataSource){
         this.productId = productId;
@@ -6,16 +7,18 @@ export default class ProductDetails {
         this.product = {};
     }
     async init(){
-        this.product = await this.dataSource.findProductById(this.productId);
-        console.log(this.product)
-        this.renderProductDetails()
-        // aggiungere un pulsante aggiungi al carrello
-        document.getElementById("addToCart").addEventListener("click", this.addToCart.bind(this)); 
+      loadHeaderFooter();
+      this.product = await this.dataSource.findProductById(this.productId);
+      console.log(this.product)
+      this.renderProductDetails()
+      // aggiungere un pulsante aggiungi al carrello
+      document.getElementById("addToCart").addEventListener("click", this.addToCart.bind(this)); 
     }
     addToCart(){
         const cartItems = getLocalStorage("so-cart") || [] ; // prendere la info dal localSotre or prendere un vettore vuoto
         cartItems.push(this.product) // aggiungere product al vettore 
         setLocalStorage("so-cart", cartItems); // impostare il vettore nell localStore
+        loadHeaderFooter();
     }
     renderProductDetails(){
       document.querySelector("#main").innerHTML = productDetailsTemplate(this.product)

@@ -261,7 +261,7 @@ footer {
   font-size: var(--small-font);
   padding: 1em;
 }
-#superscript {
+.superscript {
   display: none;
   position: absolute;
   top: 10%;

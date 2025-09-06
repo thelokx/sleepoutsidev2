@@ -40,10 +40,32 @@ export function renderListWithTemplate(templateFn, parentElement, list, position
 
 export function superscriptBackpack(){
   const cartItems = getLocalStorage("so-cart")|| [];
-  const htmlElemnet = qs("#superscript")
-  console.log(superscript)
+  const htmlElement = qs(".superscript");
   if(cartItems.length > 0){
-    htmlElemnet.style.display = "block";
-    htmlElemnet.innerHTML = cartItems.length
+    htmlElement.innerHTML = cartItems.length
+    htmlElement.style.display = "block";
   }
+}
+
+export function renderWithTemplate(template, parentElement, callback){
+  parentElement.innerHTML = template;
+  if (callback){
+    callback()
+  }
+}
+
+export async function loadTemplate(path){
+  const res = await fetch(path);
+  const template = await res.text();
+  return template;
+}
+
+export async function loadHeaderFooter(){
+  const headerTemplate = await loadTemplate("../partials/header.html");
+  const headerElement = qs("#main-header");
+  renderWithTemplate(headerTemplate, headerElement, superscriptBackpack);
+
+  const footerTemplate = await loadTemplate("../partials/footer.html");
+  const footerElement = qs("#main-footer");
+  renderWithTemplate(footerTemplate, footerElement);
 }
