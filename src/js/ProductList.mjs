@@ -1,5 +1,5 @@
-import { renderListWithTemplate, superscriptBackpack} from "./utils.mjs";
-console.log(superscriptBackpack())
+import { renderListWithTemplate } from "./utils.mjs";
+
 function productCardTemplate(product) {
   return `<li class="product-card">
     <a href="product_pages/?product=${product.Id}">
@@ -25,7 +25,6 @@ export default class ProductList{
     }
     async init(){
         const list = await this.dataSource.getData();
-        console.log(list)
         renderListWithTemplate(productCardTemplate, this.listElement, list)
     }
     
