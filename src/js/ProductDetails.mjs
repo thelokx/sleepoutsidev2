@@ -9,7 +9,6 @@ export default class ProductDetails {
     async init(){
       loadHeaderFooter();
       this.product = await this.dataSource.findProductById(this.productId);
-      console.log(this.product)
       this.renderProductDetails()
       // aggiungere un pulsante aggiungi al carrello
       document.getElementById("addToCart").addEventListener("click", this.addToCart.bind(this)); 
@@ -34,7 +33,7 @@ function productDetailsTemplate(product){
 
         <img
           class="divider"
-          src=${product.Image}
+          src=${product.Images.PrimaryLarge}
           alt=${product.NameWithotBrand}
         />
 

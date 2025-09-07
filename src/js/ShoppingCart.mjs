@@ -5,7 +5,7 @@ function cartItemTemplate(item) {
   const newItem = `<li class="cart-card divider">
   <a href="#" class="cart-card__image">
     <img
-      src="${item.Image}"
+      src="${item.Images.PrimarySmall}"
       alt="${item.Name}"
     />
   </a>
@@ -29,6 +29,7 @@ export default class ShoppingCart{
     Init(){
         loadHeaderFooter()
         this.renderCartContents();
+        console.log(this.cartItems)
     }
     renderCartContents() {
         const htmlItems = this.cartItems.map((item) => cartItemTemplate(item));
