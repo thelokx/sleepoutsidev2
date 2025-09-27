@@ -10,18 +10,25 @@
 
   <body>
     <header class="divider" id="main-header">
-      <div class="logo"> </div>
-       
+      <div class="logo"></div>
     </header>
     <main class="divider">
-      <div class="hero">
-      </div>
+      <div class="hero"></div>
       <section class="products">
         <h2 class="category-title"></h2>
+        <div class="sort-controls">
+          <label for="sort-by">Sort by: </label>
+          <select id="sort-by">
+            <option value="nonw">Sort by</option>
+            <option value="name-asc">Name (A-Z)</option>
+            <option value="name-desc">Name (Z-A)</option>
+            <option value="price-asc">Price (Low to High)</option>
+            <option value="price-desc">Price (High to Low)</option>
+          </select>
+        </div>
         <ul class="product-list"></ul>
       </section>
     </main>
-    <footer id="main-footer">
-    </footer>
+    <footer id="main-footer"></footer>
   </body>
 </html>

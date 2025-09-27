@@ -30,7 +30,8 @@ img {
   max-width: 100%;
 }
 
-header {
+
+.header-divider {
   display: flex;
   justify-content: space-between;
   padding: 0.5rem;
@@ -284,4 +285,11 @@ footer {
 .category-icon {
   width: 60px;
   margin: 2rem 2rem 2rem 2rem;
+}
+#form{
+  display: block;
+  width: 350px;
+}
+.checkout-body{
+  display: flex;
 }

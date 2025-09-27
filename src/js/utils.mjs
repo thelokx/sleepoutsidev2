@@ -32,7 +32,7 @@ export function getParam(param){
 //renderizzare elenco con modello
 export function renderListWithTemplate(templateFn, parentElement, list, position = "afterbegin", clear = false){
   if(clear == true){
-    parentElement.insertAdjacentHTML = "";
+    parentElement.innerHTML = "";
   }
   const htmlStrings = list.map(templateFn);
   parentElement.insertAdjacentHTML(position, htmlStrings.join(''));
@@ -41,10 +41,14 @@ export function renderListWithTemplate(templateFn, parentElement, list, position
 export function superscriptBackpack(){
   const cartItems = getLocalStorage("so-cart")|| [];
   const htmlElement = qs(".superscript");
+  let counter = 0;
   if(cartItems.length > 0){
-    htmlElement.innerHTML = cartItems.length
     htmlElement.style.display = "block";
+    cartItems.forEach((item) => {
+      counter += item.Quantity;
+    })
   }
+  htmlElement.innerHTML = counter;
 }
 
 export function renderWithTemplate(template, parentElement, callback){
@@ -68,4 +72,16 @@ export async function loadHeaderFooter(){
   const footerTemplate = await loadTemplate("../partials/footer.html");
   const footerElement = qs("#main-footer");
   renderWithTemplate(footerTemplate, footerElement);
+}
+
+export function showBreadCrumb(data){
+  const element = document.querySelector(".bread-crumbs")
+  const queryString = window.location.search; //get all the url
+  const urlParams = new URLSearchParams(queryString); //convert the url in a object
+  if (urlParams.has("category")){
+    element.innerHTML = `<p>Home > Category > ${getParam("category")} ${data.length} items</p>`;
+  }
+  else if(urlParams.has("product")){
+    element.innerHTML = `<p>Home > Category > ${data.Category}</p>`;
+  }
 }

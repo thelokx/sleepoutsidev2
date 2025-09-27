@@ -3,22 +3,53 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
     <title>Sleep Outside | Checkout</title>
-
-    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="../css/style.css" />
+    <script src="../js/checkout.js" type="module"></script>
   </head>
 
   <body>
-    <header class="divider" id="main-header">
-    </header>
+    <header class="divider" id="main-header"></header>
 
     <main class="divider">
       <section class="products">
         <h2>Review & Place your Order</h2>
       </section>
+      <div class="checkout-body">
+        <div>
+      <form id="form">
+        <fieldset>
+          <legend>User Data</legend>
+          <label for="fname">First Name<input type="text" name="fname" title="Provide your first name" autocomplete="given-name" required></label>
+          <label for="lname">Last Name <input type="text" name="lname" title="Provide your last name" autocomplete="family-name" required></label>
+        </fieldset>
+
+        <fieldset>
+          <legend>Adress</legend>
+          <label for="adress">Adress<input type="text" name="adress" title="Provide your adress" autocomplete="adress" required></label>
+          <label for="city">City<input type="text" name="city" title="Provide your city" required></label>
+          <label for="city">state<input type="text" name="state" title="Provide your state" required></label>
+          <label for="cap">Cap<input id="cap" type="text" name="cap" title="Provide your cap" required></label>
+        </fieldset>
+
+        <fieldset>
+          <legend>Payment</legend>
+          <label for="credit-card">Credit card<input type="text" name="credit-card" title="Provide your credit-card" required></label>
+          <label for="credit-exp">Credit card<input type="text" name="credit-exp" title="Provide your credit expiration date" required></label>
+          <label for="security-code">Credit card<input type="text" name="security-code" title="Provide your security code" required></label>
+        </fieldset>
+        <input type="submit" value="Place my Order">
+      </form>
+      </div>
+      <div class="summary">
+        <h2>Order Summary</h2>
+        <p>Subtotal : <spam id="subtotal"></spam></p>
+        <p>Tax: <spam id="tax"></spam></p>
+        <p>Shipping: <spam id="shipping"></spam></p>
+        <p>Order Total: <spam id="order-total"></spam></p>
+      </div>
+    </div>  
     </main>
 
     <footer id="main-footer"></footer>

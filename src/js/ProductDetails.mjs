@@ -1,4 +1,4 @@
-import { getLocalStorage, setLocalStorage, loadHeaderFooter } from "./utils.mjs";
+import { getLocalStorage, setLocalStorage, loadHeaderFooter, showBreadCrumb } from "./utils.mjs";
 
 export default class ProductDetails {
     constructor(productId, dataSource){
@@ -11,13 +11,23 @@ export default class ProductDetails {
       this.product = await this.dataSource.findProductById(this.productId);
       this.renderProductDetails()
       // aggiungere un pulsante aggiungi al carrello
-      document.getElementById("addToCart").addEventListener("click", this.addToCart.bind(this)); 
+      document.getElementById("addToCart").addEventListener("click", this.addToCart.bind(this));
+      showBreadCrumb(this.product)
+      
     }
     addToCart(){
-        const cartItems = getLocalStorage("so-cart") || [] ; // prendere la info dal localSotre or prendere un vettore vuoto
-        cartItems.push(this.product) // aggiungere product al vettore 
-        setLocalStorage("so-cart", cartItems); // impostare il vettore nell localStore
-        loadHeaderFooter();
+      let cartItems = getLocalStorage("so-cart") || [] ; // prendere la info dal localSotre or prendere un vettore vuoto
+      const find = cartItems.find(item => item.Id === this.product.Id);
+      if(!find){
+          cartItems.push({...this.product, Quantity : 1})
+        }
+      else{
+          find.Quantity++
+          cartItems = cartItems.filter(item=> item.Id != this.product.Id)
+          cartItems.push(find)
+        }
+      setLocalStorage("so-cart", cartItems); // impostare il vettore nell localStore
+      loadHeaderFooter();
     }
     renderProductDetails(){
       document.querySelector("#main").innerHTML = productDetailsTemplate(this.product)

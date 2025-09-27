@@ -1,0 +1,12 @@
+[
+  {
+    "message": "🎉 Free shipping this week only!",
+    "background": "goldenrod",
+    "color": "black"
+  },
+  {
+    "message": "🔥 20% off all tents until Friday!",
+    "background": "darkred",
+    "color": "white"
+  }
+]
