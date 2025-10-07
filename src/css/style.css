@@ -293,3 +293,12 @@ footer {
 .checkout-body{
   display: flex;
 }
+#myForm {
+    fieldset {
+      margin: 10px;
+      label{
+        display: block;
+        margin: 10px;
+
+}
+}}

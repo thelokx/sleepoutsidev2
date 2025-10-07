@@ -1,25 +1,33 @@
 const baseURL = import.meta.env.VITE_SERVER_URL
 
-function convertToJson(res) {
+async function convertToJson(res) {
+  const data = await res.json();
   if (res.ok) {
-    return res.json();
+    return data
   } else {
-    throw new Error("Bad Response");
+    throw { name: 'servicesError', message: data };
   }
 }
 
-export default class ProductData {
+export default class ExternalServices {
   constructor() {
   }
   async getData(category) {
     const response = await fetch(`${baseURL}products/search/${category} `);
     const data = await convertToJson(response);
-    console.log(data.Result)
     return data.Result;
   }
   async findProductById(id) {
     const response = await fetch(`${baseURL}product/${id} `);
     const data = await convertToJson(response);
     return data.Result;
+  }
+  async sendData(order){
+    const options = {
+      method: "POST",
+      headers:{"content-Type": "palication/json"},
+      body: JSON.stringify(order)
+    };
+    return await fetch(`${baseURL}checkout`, options).then(convertToJson);
   }
 }

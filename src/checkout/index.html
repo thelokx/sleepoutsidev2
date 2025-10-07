@@ -18,28 +18,28 @@
       </section>
       <div class="checkout-body">
         <div>
-      <form id="form">
+      <form id="myForm">
         <fieldset>
-          <legend>User Data</legend>
-          <label for="fname">First Name<input type="text" name="fname" title="Provide your first name" autocomplete="given-name" required></label>
-          <label for="lname">Last Name <input type="text" name="lname" title="Provide your last name" autocomplete="family-name" required></label>
+          <legend>Personal Information</legend>
+          <label for="fname">First Name<input type="text" name="fname" title="Provide your first name" autocomplete="given-name"  required></label>
+          <label for="lname">Last Name <input type="text" name="lname" title="Provide your last name" autocomplete="family-name"  required></label>
         </fieldset>
 
         <fieldset>
-          <legend>Adress</legend>
-          <label for="adress">Adress<input type="text" name="adress" title="Provide your adress" autocomplete="adress" required></label>
-          <label for="city">City<input type="text" name="city" title="Provide your city" required></label>
-          <label for="city">state<input type="text" name="state" title="Provide your state" required></label>
-          <label for="cap">Cap<input id="cap" type="text" name="cap" title="Provide your cap" required></label>
+          <legend>Adress Information</legend>
+          <label for="street">Adress<input type="text" name="street" title="Provide your street" autocomplete="street" value="Via Giuseppe Tartini 12" required></label>
+          <label for="city">City<input type="text" name="city" title="Provide your city" value="Torino" required></label>
+          <label for="state">state<input type="text" name="state" title="Provide your state" value="Piamonte" required></label>
+          <label for="cap">Cap<input type="text" name="cap" title="Provide your cap" value="10154" required></label>
         </fieldset>
 
         <fieldset>
-          <legend>Payment</legend>
-          <label for="credit-card">Credit card<input type="text" name="credit-card" title="Provide your credit-card" required></label>
-          <label for="credit-exp">Credit card<input type="text" name="credit-exp" title="Provide your credit expiration date" required></label>
-          <label for="security-code">Credit card<input type="text" name="security-code" title="Provide your security code" required></label>
+          <legend>Payment Information</legend>
+          <label for="creditCard">Credit card<input type="text" name="creditCard" title="Provide your credit-card" value="1234123412341234" required></label>
+          <label for="expiration">Exp Date<input type="text" name="expiration" title="Provide your credit expiration date" value="12/25" required></label>
+          <label for="securityCode">Security Code<input type="text" name="securityCode" title="Provide your security code" value="123" required></label>
         </fieldset>
-        <input type="submit" value="Place my Order">
+        <input id="sendButton" type="submit" value="Place my Order Now">
       </form>
       </div>
       <div class="summary">

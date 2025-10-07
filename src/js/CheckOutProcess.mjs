@@ -1,4 +1,6 @@
-import {getLocalStorage} from "./utils.mjs"
+import {getLocalStorage, setLocalStorage, loadHeaderFooter} from "./utils.mjs"
+import ExternalServices from "./ExternalServices.mjs";
+
 export default class CheckoutProcess {
   constructor(key, outputSelector) {
     this.key = key;
@@ -8,11 +10,14 @@ export default class CheckoutProcess {
     this.shipping = 0;
     this.tax = 0;
     this.orderTotal = 0;
+    this.externalServices = new ExternalServices()
   }
 
   init() {
+    loadHeaderFooter()
     this.list = getLocalStorage(this.key);
     this.calculateItemSummary();
+    this.sendInformation()
   }
 
   calculateItemSubTotal() {
@@ -26,7 +31,7 @@ export default class CheckoutProcess {
 
   calculateOrderTotal() {
     // calculate the tax and shipping amounts. Add those to the cart total to figure out the order total
-    this.tax = (this.itemTotal * 0.18)
+    this.tax = (this.itemTotal * 0.06)
     this.shipping = 15
     this.orderTotal = this.itemTotal + this.tax + this.shipping
 
@@ -50,6 +55,68 @@ export default class CheckoutProcess {
     this.calculateItemSubTotal()
     this.calculateOrderTotal()
   }
+  sendInformation(){
+    document.getElementById("sendButton").addEventListener("click",(event)=>{
+      event.preventDefault();
+      const myForm = document.getElementById("myForm");
+      const checkStatus = myForm.checkValidity();
+      myForm.reportValidity();
+      if(checkStatus)
+      this.checkout();
+      
+    })
+  }
+  async checkout(myForm) {
+  // get the form element data by the form name
+  
+  // convert the form data to a JSON order object using the formDataToJSON function
+  const data = formDataToJSON(myForm);
+  // populate the JSON order object with the order Date, orderTotal, tax, shipping, and list of items
+  const order = {
+    ...data,
+    orderDate : Date.now(),
+    orderTotal : this.orderTotal,
+    tax : this.tax,
+    shipping : this.shipping,
+    items : packgeItems(this.list)
+    
+  };
+  // call the checkout method in the ExternalServices module and send it the JSON order data.
+  
+  try{
+      const response = this.externalServices.sendData(order)
+      // setLocalStorage("so-cart", []);
+      // location.assign("../index.html");
+    }catch (err) {
+      // get rid of any preexisting alerts.
+      removeAllAlerts();
+      for (let message in err.message) {
+        alertMessage(err.message[message]);
+      }
+      console.log(err);
+    }
+  
+}
+}
+
+function packgeItems(items){
+  return items.map(item =>({
+    id: item.Id,
+    name: item.Name,
+    price: item.FinalPrice,
+    quantity : item.Quantity
+  }))
+}
+
+function formDataToJSON(formElement) {
+  const formData = new FormData(formElement),
+    convertedJSON = {};
+
+  formData.forEach((value, key)=>{
+    convertedJSON[key] = value;
+  });
+
+  return convertedJSON;
 }
 
 
